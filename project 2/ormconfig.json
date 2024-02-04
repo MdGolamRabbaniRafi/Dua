@@ -1,0 +1,7 @@
+{
+    "type": "sqlite",
+    "database": "./project/DB/dua_main.sqlite",
+    "entities": ["dist/**/*.entity{.ts,.js}"],
+    "synchronize": true
+}
+  

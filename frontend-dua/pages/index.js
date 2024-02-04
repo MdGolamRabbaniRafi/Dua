@@ -22,9 +22,10 @@ export default function Home() {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get("http://localhost:3000/findAllCategory", {
+      const response = await axios.get(process.env.NEXT_PUBLIC_dua+"findAllCategory", {
         withCredentials: true,
       });
+      console.log(response);
       if (Array.isArray(response.data) && response.data.length > 0) {
         setCategories(response.data);
         fetchSubCategories(response.data[0].cat_id);
@@ -38,7 +39,7 @@ export default function Home() {
 
   const fetchAllData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/findAllDua", {
+      const response = await axios.get(process.env.NEXT_PUBLIC_dua+"findAllDua", {
         withCredentials: true,
       });
       setSelectedDuaDetails(response.data);
@@ -50,10 +51,10 @@ export default function Home() {
   const fetchSubCategories = async (catId) => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://localhost:3000/findAllSubCatbyCat/${catId}`, {
+      const response = await axios.get(process.env.NEXT_PUBLIC_dua+`findAllSubCatbyCat/${catId}`, {
         withCredentials: true,
       });
-      const response2 = await axios.get(`http://localhost:3000/findAllDuabyCat/${catId}`, {
+      const response2 = await axios.get(process.env.NEXT_PUBLIC_dua+`findAllDuabyCat/${catId}`, {
         withCredentials: true,
       });
       setSubCategories((prev) => ({ ...prev, [catId]: response.data }));
@@ -69,7 +70,7 @@ export default function Home() {
   const fetchDuas = async (subCatId) => {
     setIsLoading(true); 
     try {
-      const response = await axios.get(`http://localhost:3000/findAllDuabySubCat/${subCatId}`, {
+      const response = await axios.get(process.env.NEXT_PUBLIC_dua+`findAllDuabySubCat/${subCatId}`, {
         withCredentials: true,
       });
       setDuas((prev) => ({ ...prev, [subCatId]: response.data }));
